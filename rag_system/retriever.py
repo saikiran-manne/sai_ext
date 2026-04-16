@@ -105,7 +105,7 @@ class SemanticRetriever:
             # similarity for a uniform interface.  FAISS with IP / cosine
             # returns similarity directly.  We normalise here: if score > 1
             # it is likely a raw distance; treat similarity = 1 / (1 + dist).
-            similarity = self._normalise_score(score)
+            similarity = self._normalize_score(score)
             if similarity >= min_score:
                 documents.append(doc)
                 scores.append(similarity)
@@ -145,7 +145,7 @@ class SemanticRetriever:
             raise AmbiguousQueryError(query, "query must contain at least one word")
 
     @staticmethod
-    def _normalise_score(score: float) -> float:
+    def _normalize_score(score: float) -> float:
         """Convert a raw store score to a 0–1 similarity value.
 
         ChromaDB returns *L2 distance* (0 = identical, ∞ = unrelated).

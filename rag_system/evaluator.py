@@ -92,14 +92,14 @@ class RetrievalEvaluator:
                 total_relevant_count=0,
             )
 
-        normalised_snippets: List[str] = [s.lower() for s in relevant_snippets]
+        normalized_snippets: List[str] = [s.lower() for s in relevant_snippets]
         retrieved = retrieval_result.documents
         retrieved_count = len(retrieved)
 
         relevant_retrieved = sum(
             1
             for doc in retrieved
-            if self._is_relevant(doc.page_content, normalised_snippets)
+            if self._is_relevant(doc.page_content, normalized_snippets)
         )
 
         total_relevant = len(relevant_snippets)
@@ -180,7 +180,7 @@ class RetrievalEvaluator:
     # ------------------------------------------------------------------
 
     @staticmethod
-    def _is_relevant(text: str, normalised_snippets: List[str]) -> bool:
+    def _is_relevant(text: str, normalized_snippets: List[str]) -> bool:
         """Return *True* if *text* contains at least one relevant snippet."""
         text_lower = text.lower()
-        return any(snippet in text_lower for snippet in normalised_snippets)
+        return any(snippet in text_lower for snippet in normalized_snippets)

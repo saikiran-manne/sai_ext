@@ -314,7 +314,7 @@ class TestSemanticRetriever:
         with pytest.raises(AmbiguousQueryError):
             retriever.retrieve("ab")  # too short
 
-    def test_score_normalisation_chroma_distance(self):
+    def test_score_normalization_chroma_distance(self):
         """L2 distance > 1 should be normalised to (0, 0.5)."""
         config = RAGConfig(similarity_threshold=0.0, top_k=5)
         doc = _make_doc("content")
